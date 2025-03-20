@@ -1,22 +1,7 @@
-export function loadData() {
-    let domain = document.getElementById("domainSelect").value;
-    let url = `http://localhost:8080/${domain}`;
+// domUtils.js
 
-    // Fetch data from API
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            console.log("Data fetched for domain:", domain, data);
-            displayData(data, domain);  // Display the data
-        })
-        .catch(error => {
-            console.error("Error fetching data:", error);
-            showErrorMessage("Error fetching data, please try again later.");
-        });
-}
-
-// Display data in a table format
-function displayData(data, domain) {
+// Function to show the data in a table
+export function displayData(data, domain) {
     let container = document.getElementById("dataContainer");
     container.innerHTML = "";  // Clear previous content
 
@@ -57,9 +42,6 @@ function displayData(data, domain) {
     data.forEach(item => {
         let row = document.createElement("tr");
 
-        // Store the actual data item in the row
-        row.dataItem = item;
-
         keyMapping.forEach(key => {
             let td = document.createElement("td");
 
@@ -88,4 +70,16 @@ function displayData(data, domain) {
     });
 
     container.appendChild(table);
+}
+
+// Function to show error messages
+export function showErrorMessage(message) {
+    let errorContainer = document.getElementById("formContainer");
+    errorContainer.innerHTML = `<p class="error">${message}</p>`;
+}
+
+// Function to show success messages
+export function showSuccessMessage(message) {
+    let successContainer = document.getElementById("formContainer");
+    successContainer.innerHTML = `<p class="success">${message}</p>`;
 }
