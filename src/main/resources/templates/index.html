@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Festival Management</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<h1>Music Festival Management</h1>
+
+<label for="domainSelect">Choose a Domain:</label>
+<select id="domainSelect" onchange="loadData()">
+    <option value="users">Users</option>
+    <option value="artists">Artists</option>
+    <option value="performances">Performances</option>
+    <option value="stages">Stages</option>
+    <option value="tickets">Tickets</option>
+</select>
+
+<!-- Buttons for CRUD operations -->
+<div id="crudButtons">
+    <button onclick="createRecord()">Create</button>
+    <button onclick="updateRecord()">Update</button>
+    <button onclick="deleteRecord()">Delete</button>
+</div>
+
+<!-- Form for CRUD operation -->
+<div id="formContainer">
+    <!-- Form fields will be dynamically generated here -->
+</div>
+
+<div id="dataContainer">
+    <!-- Data will be loaded here -->
+</div>
+
+<script type = "module" src="/DataBaseLogic.js"></script>
+
+</body>
+</html>
