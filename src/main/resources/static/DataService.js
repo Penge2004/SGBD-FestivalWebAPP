@@ -11,6 +11,9 @@ export function fetchData(domain) {
 
 // Function to send a POST request to create a new record
 export function submitCreate(domain, data) {
+
+    console.log("Sending data to backend:", data); //debug
+
     return fetch(`http://localhost:8080/${domain}`, {
         method: "POST",
         headers: {
@@ -18,11 +21,23 @@ export function submitCreate(domain, data) {
         },
         body: JSON.stringify(data)
     })
-        .then(response => response.json())
+        .then(response => {
+            console.log("Received response:", response);//debug
+            if (!response.ok) {
+                throw new Error("Failed to create record");
+            }
+
+            return response.json();  // Extracts the JSON content from the response
+        })
+        .then(responseData => {
+            console.log('Response from server:', responseData); //debug
+            return responseData;
+        })
         .catch(error => {
-            throw new Error("Error creating record: " + error);
+            console.error("Error creating record:", error);
         });
 }
+
 
 // Function to send a PUT request to update an existing record
 export function submitUpdate(domain, id, data) {

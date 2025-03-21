@@ -23,7 +23,16 @@ function createRecord() {
 
     console.log("Create record is working") //debug
 
-    generateCreateForm(domain, submitCreateUser);
+    // Mapping domain to the corresponding submit function
+    const submitFunctions = {
+        "users": submitCreateUser,
+        "artists": submitCreateArtist,
+        "performances": submitCreatePerformance,
+        "stages" : submitCreateStage,
+        "tickets" : submitCreateTicket
+    };
+
+    generateCreateForm(domain, submitFunctions[domain]);
 }
 
 // Handle other CRUD operations like update and delete similarly
@@ -72,6 +81,39 @@ function submitCreatePerformance() {
     });
 }
 
+function submitCreateStage(){
+
+     const stage_name = document.getElementById("name").value;
+     const stage_location = document.getElementById("location").value;
+
+     console.log(stage_name,stage_location);//debug
+
+    const stageData = {
+        name: stage_name,        // Change 'stage_name' to 'name'
+        location: stage_location // Change 'stage_location' to 'location'
+    };
+
+    console.log(stageData);//debug
+
+    submitCreate("stages", stageData).then(() => {
+         showSuccessMessage("Stage created successfully!");
+         loadData();
+     })
+}
+
+function submitCreateTicket(){
+    const user_id = document.getElementById("userid").value;
+    const performance_id = document.getElementById("performance_id").value;
+    const price = document.getElementById("price").value;
+    const type = document.getElementById("type").value;
+
+    const ticketData = {user_id, performance_id, price, type};
+
+    submitCreate("tickets", ticketData).then(() => {
+        showSuccessMessage("Ticket created successfully!");
+        loadData();
+    })
+}
 
 window.loadData = loadData;
 window.createRecord = createRecord;

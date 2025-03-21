@@ -24,6 +24,7 @@ export function generateCreateForm(domain, item) {
             <input type="text" id="country" placeholder="Country" required />
             <button id="createArtistBtn">Create Artist</button>
         `;
+        document.getElementById("createArtistBtn").addEventListener("click", item);
     } else if (domain === "performances") {
         formContainer.innerHTML = `
             <h2>Create Performance</h2>
@@ -32,6 +33,7 @@ export function generateCreateForm(domain, item) {
             <input type="datetime-local" id="start_time" required />
             <button id="createPerformanceBtn">Create Performance</button>
         `;
+        document.getElementById("createPerformanceBtn").addEventListener("click", item);
     } else if (domain === "stages") {
         formContainer.innerHTML = `
             <h2>Create Stage</h2>
@@ -39,6 +41,7 @@ export function generateCreateForm(domain, item) {
             <input type="text" id="location" placeholder="Location" required />
             <button id="createStageBtn">Create Stage</button>
         `;
+        document.getElementById("createStageBtn").addEventListener("click", item);
     }
 
     else if (domain === "tickets") {
@@ -50,5 +53,6 @@ export function generateCreateForm(domain, item) {
             <input type="text" id="type" placeholder="Type" required />
             <button id="createTicketBtn">Create Ticket</button>
         `;
+        document.getElementById("createTicketBtn").addEventListener("click", item);
     }
 }
