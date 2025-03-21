@@ -6,12 +6,16 @@ export function generateCreateForm(domain, item) {
     formContainer.innerHTML = "";  // Clear previous content
 
     if (domain === "users") {
+
         formContainer.innerHTML = `
             <h2>Create User</h2>
             <input type="text" id="user_name" placeholder="Name" required />
             <input type="email" id="user_email" placeholder="Email" required />
             <button id="createUserBtn">Create User</button>
         `;
+        // Attach event listener to the "Create User" button
+        document.getElementById("createUserBtn").addEventListener("click", item);
+
     } else if (domain === "artists") {
         formContainer.innerHTML = `
             <h2>Create Artist</h2>
@@ -28,6 +32,23 @@ export function generateCreateForm(domain, item) {
             <input type="datetime-local" id="start_time" required />
             <button id="createPerformanceBtn">Create Performance</button>
         `;
+    } else if (domain === "stages") {
+        formContainer.innerHTML = `
+            <h2>Create Stage</h2>
+            <input type="text" id="name" placeholder="Stage name" required />
+            <input type="text" id="location" placeholder="Location" required />
+            <button id="createStageBtn">Create Stage</button>
+        `;
     }
-    // Add other domain forms here similarly
+
+    else if (domain === "tickets") {
+        formContainer.innerHTML = `
+            <h2>Create Ticket</h2>
+            <input type="number" id="userid" placeholder="User ID" required />
+            <input type="number" id="performance_id" placeholder="Performance ID" required />
+            <input type="number" id="price" placeholder="Price" required />
+            <input type="text" id="type" placeholder="Type" required />
+            <button id="createTicketBtn">Create Ticket</button>
+        `;
+    }
 }
