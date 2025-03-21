@@ -1,5 +1,6 @@
 package com.project.sgbd_project.Controller;
 
+import com.project.sgbd_project.Domain.Artist;
 import com.project.sgbd_project.Domain.Performance;
 import com.project.sgbd_project.Services.PerformanceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,10 @@ public class PerformanceController {
     @DeleteMapping("/{id}")
     public void deletePerformance(@PathVariable int id) {
         performanceService.deletePerformance(id);
+    }
+
+    @PutMapping("/{id}")
+    public Performance updatePerformance(@PathVariable int id, @RequestBody Performance updatedPerformance) {
+        return performanceService.updatePerformance(id, updatedPerformance);
     }
 }

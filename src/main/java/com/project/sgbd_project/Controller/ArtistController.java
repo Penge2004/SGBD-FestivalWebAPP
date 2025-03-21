@@ -1,6 +1,7 @@
 package com.project.sgbd_project.Controller;
 
 import com.project.sgbd_project.Domain.Artist;
+import com.project.sgbd_project.Domain.User;
 import com.project.sgbd_project.Services.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,10 @@ public class ArtistController {
     @DeleteMapping("/{id}")
     public void deleteArtist(@PathVariable int id) {
         artistService.deleteArtist(id);
+    }
+
+    @PutMapping("/{id}")
+    public Artist updateArtist(@PathVariable int id, @RequestBody Artist updatedArtist) {
+        return artistService.updateArtist(id, updatedArtist);
     }
 }

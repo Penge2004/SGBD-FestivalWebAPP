@@ -2,6 +2,7 @@
 
 // Function to show the data in a table
 import {deleteRecord} from "/DataService.js";
+import {generateUpdateForm} from "./FormUtils.js";
 
 export function displayData(data, domain) {
     let container = document.getElementById("dataContainer");
@@ -62,6 +63,15 @@ export function displayData(data, domain) {
         let editBtn = document.createElement("button");
         editBtn.textContent = "Edit";
         actionsTd.appendChild(editBtn);
+
+        // Add Edit button functionality in the displayData function
+        editBtn.addEventListener("click", function() {
+            // Get the record ID from the row or the item (e.g., stage_id)
+            const id = item.stage_id || item.artist_id || item.userid || item.performance_id || item.ticket_id;
+
+            // Populate the form with the existing data
+            generateUpdateForm(domain, id, item);
+        });
 
         // Delete button with an event listener
         let deleteBtn = document.createElement("button");

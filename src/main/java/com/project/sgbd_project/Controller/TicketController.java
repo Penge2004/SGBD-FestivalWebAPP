@@ -1,5 +1,6 @@
 package com.project.sgbd_project.Controller;
 
+import com.project.sgbd_project.Domain.Performance;
 import com.project.sgbd_project.Domain.Ticket;
 import com.project.sgbd_project.Domain.Ticket;
 import com.project.sgbd_project.Services.TicketService;
@@ -34,5 +35,10 @@ public class TicketController {
     @DeleteMapping("/{id}")
     public void deleteTicket(@PathVariable int id) {
         ticketService.deleteTicket(id);
+    }
+
+    @PutMapping("/{id}")
+    public Ticket updateTicket(@PathVariable int id, @RequestBody Ticket updatedTicket) {
+        return ticketService.updateTicket(id, updatedTicket);
     }
 }

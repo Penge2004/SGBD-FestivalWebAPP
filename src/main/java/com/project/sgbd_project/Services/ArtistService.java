@@ -30,4 +30,15 @@ public class ArtistService {
     public void deleteArtist(int id) {
         artistRepository.deleteById(id);
     }
+
+    public Artist updateArtist(int id, Artist updatedArtist) {
+        return artistRepository.findById(id)
+                .map(existingArtist -> {
+                    existingArtist.setName(updatedArtist.getName());
+                    existingArtist.setGenre(updatedArtist.getGenre());
+                    existingArtist.setCountry(updatedArtist.getCountry());
+                    return artistRepository.save(existingArtist);
+                })
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+    }
 }

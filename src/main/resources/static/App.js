@@ -115,5 +115,73 @@ function submitCreateTicket(){
     })
 }
 
+// Function to submit the updated user data
+export function submitUpdateUser(id) {
+    const name = document.getElementById("user_name").value;
+    const email = document.getElementById("user_email").value;
+
+    const userData = { name, email };  // Create an object with the updated values
+
+    submitUpdate("users", id, userData).then(() => {
+        showSuccessMessage("User updated successfully!");
+        loadData();  // Reload the data after updating
+    });
+}
+
+// Function to submit the updated artist data
+export function submitUpdateArtist(id) {
+    const name = document.getElementById("artist_name").value;
+    const genre = document.getElementById("genre").value;
+    const country = document.getElementById("country").value;
+
+    const artistData = { name, genre, country };  // Create an object with the updated values
+
+    submitUpdate("artists", id, artistData).then(() => {
+        showSuccessMessage("Artist updated successfully!");
+        loadData();  // Reload the data after updating
+    });
+}
+
+// Function to submit the updated performance data
+export function submitUpdatePerformance(id) {
+    const artist_id = document.getElementById("artist_id").value;
+    const stage_id = document.getElementById("stage_id").value;
+    const start_time = document.getElementById("start_time").value;
+
+    const performanceData = { artist_id, stage_id, start_time };
+
+    submitUpdate("performances", id, performanceData).then(() => {
+        showSuccessMessage("Performance updated successfully!");
+        loadData();  // Reload the data after updating
+    });
+}
+
+// Function to submit the updated stage data
+export function submitUpdateStage(id) {
+    const stage_name = document.getElementById("name").value;
+    const stage_location = document.getElementById("location").value;
+
+    const stageData = { name: stage_name, location: stage_location };
+
+    submitUpdate("stages", id, stageData).then(() => {
+        showSuccessMessage("Stage updated successfully!");
+        loadData();  // Reload the data after updating
+    });
+}
+
+export function submitUpdateTicket(id){
+    const user_id = document.getElementById("userid").value;
+    const performance_id = document.getElementById("performance_id").value;
+    const price = document.getElementById("price").value;
+    const type = document.getElementById("type").value;
+
+    const ticketData = {user_id, performance_id, price, type};
+
+    submitUpdate("tickets", id,  ticketData).then(() => {
+        showSuccessMessage("Ticket updated successfully!");
+        loadData();
+    })
+}
+
 window.loadData = loadData;
 window.createRecord = createRecord;

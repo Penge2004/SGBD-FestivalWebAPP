@@ -1,6 +1,7 @@
 package com.project.sgbd_project.Services;
 
 import com.project.sgbd_project.Domain.Stage;
+import com.project.sgbd_project.Domain.Stage;
 import com.project.sgbd_project.Repository.StageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,5 +29,15 @@ public class StageService {
 
     public void deleteStage(int id) {
         stageRepository.deleteById(id);
+    }
+
+    public Stage updateStage(int id, Stage updatedStage) {
+        return stageRepository.findById(id)
+                .map(existingStage -> {
+                    existingStage.setName(updatedStage.getName());
+                    existingStage.setLocation(updatedStage.getLocation());
+                    return stageRepository.save(existingStage);
+                })
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
     }
 }

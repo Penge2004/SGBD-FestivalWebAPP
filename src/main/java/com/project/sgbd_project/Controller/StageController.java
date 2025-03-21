@@ -34,4 +34,9 @@ public class StageController {
     public void deleteStage(@PathVariable int id) {
         stageService.deleteStage(id);
     }
+
+    @PutMapping("/{id}")
+    public Stage updateStage(@PathVariable int id, @RequestBody Stage updatedStage) {
+        return stageService.updateStage(id, updatedStage);
+    }
 }

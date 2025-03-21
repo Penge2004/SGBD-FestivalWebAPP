@@ -29,4 +29,15 @@ public class PerformanceService {
     public void deletePerformance(int id) {
         performanceRepository.deleteById(id);
     }
+
+    public Performance updatePerformance(int id, Performance updatedPerformance) {
+        return performanceRepository.findById(id)
+                .map(existingPerformance -> {
+                    existingPerformance.setArtist(updatedPerformance.getArtist());
+                    existingPerformance.setStage(updatedPerformance.getStage());
+                    existingPerformance.setStart_time(updatedPerformance.getStart_time());
+                    return performanceRepository.save(existingPerformance);
+                })
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+    }
 }
