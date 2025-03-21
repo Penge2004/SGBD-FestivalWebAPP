@@ -1,6 +1,8 @@
 // domUtils.js
 
 // Function to show the data in a table
+import {deleteRecord} from "/DataService.js";
+
 export function displayData(data, domain) {
     let container = document.getElementById("dataContainer");
     container.innerHTML = "";  // Clear previous content
@@ -61,10 +63,23 @@ export function displayData(data, domain) {
         editBtn.textContent = "Edit";
         actionsTd.appendChild(editBtn);
 
+        // Delete button with an event listener
         let deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
-        actionsTd.appendChild(deleteBtn);
 
+        // Add delete button functionality
+        deleteBtn.addEventListener("click", () => {
+            // Extract the ID of the record from the row (depends on your domain)
+            const recordId = item[keyMapping[0]];  // Assuming the first key is the ID
+            deleteRecord(domain, recordId).then(() => {
+                showSuccessMessage(`${domain.slice(0, -1).toUpperCase()} deleted successfully!`);
+                loadData();  // Reload the data after deletion
+            }).catch((error) => {
+                showErrorMessage(`Error deleting ${domain.slice(0, -1)}: ${error.message}`);
+            });
+        });
+
+        actionsTd.appendChild(deleteBtn);
         row.appendChild(actionsTd);
         table.appendChild(row);
     });

@@ -83,10 +83,10 @@ function submitCreatePerformance() {
 
 function submitCreateStage(){
 
-     const stage_name = document.getElementById("name").value;
-     const stage_location = document.getElementById("location").value;
+    const stage_name = document.getElementById("name").value;
+    const stage_location = document.getElementById("location").value;
 
-     console.log(stage_name,stage_location);//debug
+    console.log(stage_name,stage_location);//debug
 
     const stageData = {
         name: stage_name,        // Change 'stage_name' to 'name'
@@ -96,9 +96,9 @@ function submitCreateStage(){
     console.log(stageData);//debug
 
     submitCreate("stages", stageData).then(() => {
-         showSuccessMessage("Stage created successfully!");
-         loadData();
-     })
+        showSuccessMessage("Stage created successfully!");
+        loadData();
+    })
 }
 
 function submitCreateTicket(){
