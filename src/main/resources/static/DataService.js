@@ -12,8 +12,6 @@ export function fetchData(domain) {
 // Function to send a POST request to create a new record
 export function submitCreate(domain, data) {
 
-    console.log("Sending data to backend:", data); //debug
-
     return fetch(`http://localhost:8080/${domain}`, {
         method: "POST",
         headers: {

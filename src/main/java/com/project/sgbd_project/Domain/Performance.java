@@ -26,28 +26,6 @@ public class Performance {
     @Column(name = "performance_time")
     private LocalDateTime start_time;
 
-    @Transient
-    private int artistID;
-
-    @Transient
-    private int stageID;
-
-    public int getArtistID(){
-        return artistID;
-    }
-
-    public void setArtistID(int artistID){
-        this.artistID = artistID;
-    }
-
-    public int getStageID(){
-        return stageID;
-    }
-
-    public void setStageID(int stageID){
-        this.stageID = stageID;
-    }
-
     public int getPerformance_id() {
         return performance_id;
     }
@@ -82,6 +60,14 @@ public class Performance {
 
     public int getArtistId() {
         return artist.getArtist_id();
+    }
+
+    public void setArtistId(int id){
+        this.artist.setArtist_id(id);
+    }
+
+    public void setStageId(int id){
+        this.stage.setStage_id(id);
     }
 
     public int getStageId() {
