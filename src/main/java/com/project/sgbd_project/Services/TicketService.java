@@ -1,8 +1,12 @@
 package com.project.sgbd_project.Services;
 
+import com.project.sgbd_project.Domain.Performance;
 import com.project.sgbd_project.Domain.Ticket;
 
+import com.project.sgbd_project.Domain.User;
+import com.project.sgbd_project.Repository.PerformanceRepository;
 import com.project.sgbd_project.Repository.TicketRepository;
+import com.project.sgbd_project.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +18,10 @@ public class TicketService {
 
     @Autowired
     private TicketRepository ticketRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PerformanceRepository performanceRepository;
 
     public List<Ticket> getAllTickets() {
         return ticketRepository.findAll();
@@ -23,7 +31,17 @@ public class TicketService {
         return ticketRepository.findById(id);
     }
 
-    public Ticket saveTicket(Ticket ticket) {
+    public Ticket saveTicket(int userid, int performance_id, double price, String ticket_type) {
+        User user = userRepository.findById(userid).orElseThrow(() ->new IllegalArgumentException("User not found"));
+        Performance performance = performanceRepository.findById(performance_id)
+                .orElseThrow(() ->new IllegalArgumentException("Performance not found"));
+
+        Ticket ticket = new Ticket();
+        ticket.setUser(user);
+        ticket.setPerformance(performance);
+        ticket.setPrice(price);
+        ticket.setTicket_type(ticket_type);
+
         return ticketRepository.save(ticket);
     }
 

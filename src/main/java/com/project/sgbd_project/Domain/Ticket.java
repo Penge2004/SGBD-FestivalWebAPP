@@ -1,5 +1,6 @@
 package com.project.sgbd_project.Domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,15 +14,16 @@ public class Ticket {
     private int ticket_id;
 
     @ManyToOne
-    @JoinColumn(name = "userid", nullable = false)
+    @JoinColumn(name = "userid", referencedColumnName = "userid",nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "performance_id", nullable = false)
+    @JoinColumn(name = "performance_id", referencedColumnName = "performance_id",nullable = false)
     private Performance performance;
 
     private Double price;
     private String ticket_type;
+
 
     public int getTicket_id() {
         return ticket_id;
@@ -33,6 +35,16 @@ public class Ticket {
 
     public User getUser() {
         return user;
+    }
+
+    @JsonProperty("userid")
+    public int getUserId(){
+        return user.getUserid();
+    }
+
+    @JsonProperty("performance_id")
+    public int getPerformanceId(){
+        return performance.getPerformance_id();
     }
 
     public void setUser(User user) {

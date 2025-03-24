@@ -38,9 +38,9 @@ public class PerformanceController {
     @PostMapping
     public Performance createPerformance(@RequestBody PerformanceRequest performanceRequest) {
 
-        System.out.println(performanceRequest);
+//        System.out.println(performanceRequest);
 
-        System.out.println("Received performance request: " + performanceRequest.getPerformanceDate());
+//        System.out.println("Received performance request: " + performanceRequest.getPerformanceDate());
         if(performanceRequest.getPerformanceDate() == null)
             throw new IllegalArgumentException("Date cannot be null");
 
