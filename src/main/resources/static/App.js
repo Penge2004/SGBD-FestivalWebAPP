@@ -75,6 +75,7 @@ function submitCreatePerformance() {
     const performanceData = { artist_id, stage_id, start_time };  // Create an object with the input values
 
     // Call the submitCreate function and pass the data to the API
+    console.log(performanceData) // DEBUG
     submitCreate("performances", performanceData).then(() => {
         showSuccessMessage("Performance created successfully!");
         loadData();  // Reload the data after creation

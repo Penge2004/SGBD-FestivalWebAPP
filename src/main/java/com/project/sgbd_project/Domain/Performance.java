@@ -16,14 +16,37 @@ public class Performance {
     private int performance_id;
 
     @ManyToOne
-    @JoinColumn(name = "artist_id", nullable = false)
+    @JoinColumn(name = "artist_id", referencedColumnName = "artist_id", nullable = false)
     private Artist artist;
 
     @ManyToOne
-    @JoinColumn(name = "stage_id", nullable = false)
+    @JoinColumn(name = "stage_id", referencedColumnName = "stage_id", nullable = false)
     private Stage stage;
 
+    @Column(name = "performance_time")
     private LocalDateTime start_time;
+
+    @Transient
+    private int artistID;
+
+    @Transient
+    private int stageID;
+
+    public int getArtistID(){
+        return artistID;
+    }
+
+    public void setArtistID(int artistID){
+        this.artistID = artistID;
+    }
+
+    public int getStageID(){
+        return stageID;
+    }
+
+    public void setStageID(int stageID){
+        this.stageID = stageID;
+    }
 
     public int getPerformance_id() {
         return performance_id;
@@ -55,6 +78,14 @@ public class Performance {
 
     public void setStart_time(LocalDateTime start_time) {
         this.start_time = start_time;
+    }
+
+    public int getArtistId() {
+        return artist.getArtist_id();
+    }
+
+    public int getStageId() {
+        return stage.getStage_id();
     }
 
     @Override
