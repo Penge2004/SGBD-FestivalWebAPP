@@ -13,6 +13,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The Controller to the Ticket object.
+ * It is the connection between the UI (website) and the Service layer.
+ * It makes the mapping with the different HTTP requests
+ * */
 @RestController
 @RequestMapping("/tickets")
 public class TicketController {
@@ -36,6 +41,9 @@ public class TicketController {
         return ticketService.getTicketById(id);
     }
 
+    /**
+     * This makes the Create operation
+     * */
     @PostMapping
     public Ticket createTicket(@RequestBody TicketRequest ticketRequest) {
 
@@ -47,11 +55,17 @@ public class TicketController {
                                         ticketRequest.getTicket_type());
     }
 
+    /**
+     * This makes the Delete operation
+     * */
     @DeleteMapping("/{id}")
     public void deleteTicket(@PathVariable int id) {
         ticketService.deleteTicket(id);
     }
 
+    /**
+     * This makes the Update operation
+     * */
     @PutMapping("/{id}")
     public Ticket updateTicket(@PathVariable int id, @RequestBody TicketRequest ticketRequest) {
 

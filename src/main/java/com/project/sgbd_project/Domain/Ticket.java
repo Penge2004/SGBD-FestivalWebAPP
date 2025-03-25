@@ -4,19 +4,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * The Ticket Object, it corresponds with the Ticket in the Database
+ * */
 @Entity
 @Table(name = "tickets")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Ticket {
+    /**
+     * The Primary key
+     * */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ticket_id;
 
+    /**
+     * Foreign key to the User table
+     * */
     @ManyToOne
     @JoinColumn(name = "userid", referencedColumnName = "userid",nullable = false)
     private User user;
 
+    /**
+     * Foreign key to the Performance table
+     * */
     @ManyToOne
     @JoinColumn(name = "performance_id", referencedColumnName = "performance_id",nullable = false)
     private Performance performance;

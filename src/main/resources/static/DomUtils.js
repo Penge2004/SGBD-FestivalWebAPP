@@ -1,9 +1,8 @@
 // domUtils.js
-
-// Function to show the data in a table
 import {deleteRecord} from "/DataService.js";
 import {generateUpdateForm} from "./FormUtils.js";
 
+// Function to show the data in a table
 export function displayData(data, domain) {
     let container = document.getElementById("dataContainer");
     container.innerHTML = "";  // Clear previous content
@@ -67,9 +66,24 @@ export function displayData(data, domain) {
         // Add Edit button functionality in the displayData function
         editBtn.addEventListener("click", function() {
             // Get the record ID from the row or the item (e.g., stage_id)
-            const id = item.stage_id || item.artist_id || item.userid || item.performance_id || item.ticket_id;
+            let id;
+            if (domain === 'performances') {
+                console.log("Extracting performance_id:", item.performance_id); // Debugging log
+                id = item.performance_id;
+            } else if (domain === 'tickets') {
+                console.log("Extracting ticket_id:", item.ticket_id); // Debugging log
+                id = item.ticket_id;
+            } else if (domain === 'stages') {
+                console.log("Extracting stage_id:", item.stage_id); // Debugging log
+                id = item.stage_id;
+            } else if (domain === 'artists') {
+                console.log("Extracting artist_id:", item.artist_id); // Debugging log
+                id = item.artist_id;
+            } else if (domain === 'users') {
+                console.log("Extracting userid:", item.userid); // Debugging log
+                id = item.userid;
+            }
 
-            // Populate the form with the existing data
             generateUpdateForm(domain, id, item);
         });
 

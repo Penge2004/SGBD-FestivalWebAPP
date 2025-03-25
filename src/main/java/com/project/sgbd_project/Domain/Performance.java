@@ -5,20 +5,33 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
+
+/**
+ * The Performance Object, it corresponds with the Performance in the Database
+ * */
 @Entity
 @Table(name = "performances")  // Explicitly setting table name
 @NoArgsConstructor
 @AllArgsConstructor
 public class Performance {
 
+    /**
+     * The primary key
+     * */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int performance_id;
 
+    /**
+     * Foreign key to the Artist table
+     * */
     @ManyToOne
     @JoinColumn(name = "artist_id", referencedColumnName = "artist_id", nullable = false)
     private Artist artist;
 
+    /**
+     * Foreign key to the Stage table
+     * */
     @ManyToOne
     @JoinColumn(name = "stage_id", referencedColumnName = "stage_id", nullable = false)
     private Stage stage;

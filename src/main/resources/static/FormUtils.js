@@ -9,6 +9,7 @@ import {
     submitUpdateUser
 } from "./App.js";
 
+//Generates the Form for creating a new object
 export function generateCreateForm(domain, item) {
     let formContainer = document.getElementById("formContainer");
     formContainer.innerHTML = "";  // Clear previous content
@@ -32,6 +33,7 @@ export function generateCreateForm(domain, item) {
             <input type="text" id="country" placeholder="Country" required />
             <button id="createArtistBtn">Create Artist</button>
         `;
+        // Attach event listener to the "Create Artist" button
         document.getElementById("createArtistBtn").addEventListener("click", item);
     } else if (domain === "performances") {
         formContainer.innerHTML = `
@@ -41,6 +43,7 @@ export function generateCreateForm(domain, item) {
             <input type="datetime-local" id="start_time" required />
             <button id="createPerformanceBtn">Create Performance</button>
         `;
+        // Attach event listener to the "Create Performance" button
         document.getElementById("createPerformanceBtn").addEventListener("click", item);
     } else if (domain === "stages") {
         formContainer.innerHTML = `
@@ -49,6 +52,7 @@ export function generateCreateForm(domain, item) {
             <input type="text" id="location" placeholder="Location" required />
             <button id="createStageBtn">Create Stage</button>
         `;
+        // Attach event listener to the "Create Stage" button
         document.getElementById("createStageBtn").addEventListener("click", item);
     }
 
@@ -61,6 +65,7 @@ export function generateCreateForm(domain, item) {
             <input type="text" id="type" placeholder="Type" required />
             <button id="createTicketBtn">Create Ticket</button>
         `;
+        // Attach event listener to the "Create Ticket" button
         document.getElementById("createTicketBtn").addEventListener("click", item);
     }
 }

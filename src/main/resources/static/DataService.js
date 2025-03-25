@@ -20,7 +20,6 @@ export function submitCreate(domain, data) {
         body: JSON.stringify(data)
     })
         .then(response => {
-            console.log("Received response:", response);//debug
             if (!response.ok) {
                 throw new Error("Failed to create record");
             }
@@ -28,7 +27,6 @@ export function submitCreate(domain, data) {
             return response.json();  // Extracts the JSON content from the response
         })
         .then(responseData => {
-            console.log('Response from server:', responseData); //debug
             return responseData;
         })
         .catch(error => {
@@ -39,6 +37,7 @@ export function submitCreate(domain, data) {
 
 // Function to send a PUT request to update an existing record
 export function submitUpdate(domain, id, data) {
+
     return fetch(`http://localhost:8080/${domain}/${id}`, {
         method: "PUT",
         headers: {

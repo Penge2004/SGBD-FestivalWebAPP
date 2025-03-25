@@ -2,6 +2,11 @@ package com.project.sgbd_project.Domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/***
+ * This is an auxiliary object that helps by the passing of data
+ * in the TicketController, it contains only the primary and foreign keys (IDs to different tables)
+ * as well as the price and the type of the ticket
+ */
 public class TicketRequest {
     @JsonProperty("user_id")
     private String userid;

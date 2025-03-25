@@ -8,17 +8,27 @@ import com.project.sgbd_project.Repository.ArtistRepository;
 import com.project.sgbd_project.Repository.PerformanceRepository;
 import com.project.sgbd_project.Repository.StageRepository;
 import com.project.sgbd_project.Services.PerformanceService;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import jakarta.persistence.EntityManager;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
+
+/**
+ * The Controller to the Performance object.
+ * It is the connection between the UI (website) and the Service layer.
+ * It makes the mapping with the different HTTP requests
+ * */
 @RestController
 @RequestMapping("/performances")
 public class PerformanceController {
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Autowired
     private PerformanceService performanceService;
@@ -35,12 +45,12 @@ public class PerformanceController {
         return performanceService.getPerformanceById(id);
     }
 
+    /**
+     * This makes the Create operation
+     * */
     @PostMapping
     public Performance createPerformance(@RequestBody PerformanceRequest performanceRequest) {
 
-//        System.out.println(performanceRequest);
-
-//        System.out.println("Received performance request: " + performanceRequest.getPerformanceDate());
         if(performanceRequest.getPerformanceDate() == null)
             throw new IllegalArgumentException("Date cannot be null");
 
@@ -62,14 +72,22 @@ public class PerformanceController {
                 performanceDateTime);
     }
 
+    /**
+     * This makes the Delete operation
+     * */
     @DeleteMapping("/{id}")
     public void deletePerformance(@PathVariable int id) {
         performanceService.deletePerformance(id);
     }
 
+    /**
+     * This makes the Update operation
+     * */
+    @Transactional
     @PutMapping("/{id}")
     public Performance updatePerformance(@PathVariable int id,
                                          @RequestBody PerformanceRequest performanceRequest) {
+
 
         Performance existingPerformance = performanceRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Performance not found"));
@@ -84,13 +102,22 @@ public class PerformanceController {
         Stage newStage = stageRepository.findById(stageId)
                 .orElseThrow(() -> new RuntimeException("Stage not found"));
 
-        // Update the performance with the new artist and stage
-        existingPerformance.setArtist(newArtist);  // Set the new artist
-        existingPerformance.setStage(newStage);    // Set the new stage (optional)
-        existingPerformance.setStart_time(LocalDateTime.parse(performanceRequest.getPerformanceDate()));  // Update performance time
+        System.out.println("Existing Performance: " + existingPerformance);
+        System.out.println("New Artist ID: " + artistId);
+        System.out.println("New Stage ID: " + stageId);
+        System.out.println("New Performance Date: " + performanceRequest.getPerformanceDate());
 
-        // Save the updated performance entity
-        return performanceRepository.save(existingPerformance);
+        existingPerformance.setArtist(newArtist);
+        existingPerformance.setStage(newStage);
+        existingPerformance.setStart_time(LocalDateTime.parse(performanceRequest.getPerformanceDate()));
+
+        // Force Hibernate to update the database
+        entityManager.flush();
+        entityManager.refresh(existingPerformance);
+
+        System.out.println("Final Updated Performance: " + existingPerformance);
+
+        return existingPerformance;
     }
 
     @GetMapping

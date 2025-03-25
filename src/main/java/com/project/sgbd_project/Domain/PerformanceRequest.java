@@ -5,8 +5,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /***
- * This class is used in the PerformanceController as an object that has only the id and date necessary
- * because the Performance is only created in the service
+ * This is an auxiliary object that helps by the passing of data
+ * in the PerformanceController, it contains only the primary and foreign keys (IDs to different tables)
+ * as well as the date
  */
 public class PerformanceRequest {
     @JsonProperty("artist_id")

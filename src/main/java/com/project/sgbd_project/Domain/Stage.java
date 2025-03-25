@@ -3,12 +3,18 @@ package com.project.sgbd_project.Domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * The Stage Object, it corresponds with the Stage in the Database
+ * */
 @Entity
 @Table(name = "stages")  // Explicitly setting table name
 @NoArgsConstructor
 @AllArgsConstructor
 public class Stage {
 
+    /**
+     * The Primary key
+     * */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int stage_id;

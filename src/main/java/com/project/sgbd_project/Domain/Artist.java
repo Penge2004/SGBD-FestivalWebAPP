@@ -3,12 +3,20 @@ package com.project.sgbd_project.Domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+
+/**
+ * The Artist Object, it corresponds with the Artist in the Database
+ * */
+
 @Entity
 @Table(name = "artists")  // Explicitly setting table name
 @NoArgsConstructor
 @AllArgsConstructor
 public class Artist {
 
+    /**
+     * The primary key
+     * */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int artist_id;

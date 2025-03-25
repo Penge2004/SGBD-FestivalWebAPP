@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This is the service layer for the User object.
+ * It handles the main business logic
+ * It has a direct connection with the appropriate repository
+ * */
 @Service
 public class UserService {
 

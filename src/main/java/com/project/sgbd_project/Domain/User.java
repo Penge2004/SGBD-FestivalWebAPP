@@ -3,6 +3,9 @@ package com.project.sgbd_project.Domain;
 import jakarta.persistence.*;
 import lombok.*;
 
+/**
+ * The User Object, it could also be named viewer, it corresponds with the User in the Database
+ * */
 @Entity
 @Table(name = "users")  // Ensures correct table name
 @NoArgsConstructor
@@ -10,6 +13,10 @@ import lombok.*;
 
 public class User {
 
+    /**
+     * The Primary key
+     * It is names userid because user_id is a function in PostgreSQL
+     * */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userid")

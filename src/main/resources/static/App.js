@@ -21,8 +21,6 @@ function createRecord() {
     const domainSelect = document.getElementById('domainSelect');
     const domain = domainSelect.value;
 
-    console.log("Create record is working") //debug
-
     // Mapping domain to the corresponding submit function
     const submitFunctions = {
         "users": submitCreateUser,
@@ -35,7 +33,6 @@ function createRecord() {
     generateCreateForm(domain, submitFunctions[domain]);
 }
 
-// Handle other CRUD operations like update and delete similarly
 // Function to submit the new user data
 function submitCreateUser() {
 
@@ -74,27 +71,22 @@ function submitCreatePerformance() {
 
     const performanceData = { artist_id, stage_id, start_time };  // Create an object with the input values
 
-    // Call the submitCreate function and pass the data to the API
-    console.log(performanceData) // DEBUG
     submitCreate("performances", performanceData).then(() => {
         showSuccessMessage("Performance created successfully!");
         loadData();  // Reload the data after creation
     });
 }
 
+// Function to submit the new stage data
 function submitCreateStage(){
 
     const stage_name = document.getElementById("name").value;
     const stage_location = document.getElementById("location").value;
 
-    console.log(stage_name,stage_location);//debug
-
     const stageData = {
         name: stage_name,        // Change 'stage_name' to 'name'
         location: stage_location // Change 'stage_location' to 'location'
     };
-
-    console.log(stageData);//debug
 
     submitCreate("stages", stageData).then(() => {
         showSuccessMessage("Stage created successfully!");
@@ -102,6 +94,7 @@ function submitCreateStage(){
     })
 }
 
+// Function to submit the new ticket data
 function submitCreateTicket(){
     const user_id = document.getElementById("userid").value;
     const performance_id = document.getElementById("performance_id").value;
@@ -170,6 +163,7 @@ export function submitUpdateStage(id) {
     });
 }
 
+// Function to submit the updated ticket data
 export function submitUpdateTicket(id){
     const user_id = document.getElementById("userid").value;
     const performance_id = document.getElementById("performance_id").value;
